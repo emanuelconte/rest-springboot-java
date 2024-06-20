@@ -1,4 +1,4 @@
-package br.com.java.Controller;
+package br.com.java.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
