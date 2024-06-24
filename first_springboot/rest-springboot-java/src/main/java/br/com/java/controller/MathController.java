@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.java.MathValidator;
 import br.com.java.SimpleMath;
-import br.com.java.exceptions.UnsupportedMathOperationException;
+import br.com.java.exceptions.ResourceNotFoundException;
 
 @RestController
 public class MathController {
@@ -84,7 +84,7 @@ public class MathController {
 	}
 	
 	private void numericException() {
-		throw new UnsupportedMathOperationException("Please set a numeric value!");
+		throw new ResourceNotFoundException("Please set a numeric value!");
 	}
 
 }
