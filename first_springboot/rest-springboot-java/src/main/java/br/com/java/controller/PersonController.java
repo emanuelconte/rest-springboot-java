@@ -21,48 +21,48 @@ import br.com.java.services.PersonServices;
 @RestController
 @RequestMapping("/person")
 public class PersonController {
+	
+	private static final String APPLICATION_YAML_VALUE = "application/x-yaml";
 
 	@Autowired
 	private PersonServices service;
 
 	@GetMapping(value = "/{id}",
-			produces = MediaType.APPLICATION_JSON_VALUE)
+				produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public PersonVO findById(@PathVariable(value = "id") Long id){
 		return service.findById(id);
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public List<PersonVO> findAll(){
 		return service.findAll();
 	}
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE},
+				 produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public PersonVO create(@RequestBody PersonVO person){
 		return service.create(person);
 	}
 
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE},
+				produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public PersonVO update(@RequestBody PersonVO person){
 		return service.update(person);
 	}
 	
 	@DeleteMapping(value = "/{id}",
-			produces = MediaType.APPLICATION_JSON_VALUE)
+			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	
 	//////// V2
-	
-	@PostMapping(value = "/v2", consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/v2", 
+			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE},
+			produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, APPLICATION_YAML_VALUE})
 	public PersonVOV2 createV2(@RequestBody PersonVOV2 person){
 		return service.createV2(person);
 	}
-
 	
 }
