@@ -1,7 +1,5 @@
 package br.com.java.mapper.custom;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Service;
 
 import br.com.java.data.vo.v2.PersonVOV2;
@@ -17,7 +15,7 @@ public class PersonMapper {
 		vo.setFirstName(person.getFirstName());
 		vo.setLastName(person.getLastName());
 		vo.setGender(person.getGender());
-		vo.setBirthDay(new Date());
+		//vo.setBirthDay(new Date());
 		return vo;
 	}
 	
