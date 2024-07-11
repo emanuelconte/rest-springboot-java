@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.java.data.vo.v1.BookVO;
-import br.com.java.model.Book;
+import br.com.data.vo.v1.BookVO;
+import br.com.model.Book;
 
 public class MockBook {
 	

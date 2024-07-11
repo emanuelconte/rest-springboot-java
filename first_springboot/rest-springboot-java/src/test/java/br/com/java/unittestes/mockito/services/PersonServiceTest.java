@@ -19,12 +19,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.java.data.vo.v1.PersonVO;
-import br.com.java.exceptions.RequiredObjectIsNullException;
-import br.com.java.model.Person;
-import br.com.java.repositories.PersonRepository;
-import br.com.java.services.PersonService;
+import br.com.data.vo.v1.PersonVO;
+import br.com.exceptions.RequiredObjectIsNullException;
 import br.com.java.unittest.mapper.MockPerson;
+import br.com.model.Person;
+import br.com.repositories.PersonRepository;
+import br.com.services.PersonService;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)

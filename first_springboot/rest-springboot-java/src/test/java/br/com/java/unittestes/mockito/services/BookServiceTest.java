@@ -20,12 +20,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import br.com.java.data.vo.v1.BookVO;
-import br.com.java.exceptions.RequiredObjectIsNullException;
-import br.com.java.model.Book;
-import br.com.java.repositories.BookRepository;
-import br.com.java.services.BookService;
+import br.com.data.vo.v1.BookVO;
+import br.com.exceptions.RequiredObjectIsNullException;
 import br.com.java.unittest.mapper.MockBook;
+import br.com.model.Book;
+import br.com.repositories.BookRepository;
+import br.com.services.BookService;
 
 
 

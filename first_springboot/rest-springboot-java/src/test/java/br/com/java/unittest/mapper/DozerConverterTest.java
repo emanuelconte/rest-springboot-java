@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.java.data.vo.v1.PersonVO;
-import br.com.java.mapper.DozerMapper;
-import br.com.java.model.Person;
+import br.com.data.vo.v1.PersonVO;
+import br.com.mapper.DozerMapper;
+import br.com.model.Person;
 
 public class DozerConverterTest {
     
