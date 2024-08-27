@@ -26,10 +26,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class JwtTokenProvider {
 	
-	@Value("${security.jwt.token.secret-key:secretKey}")
+	@Value("${security.jwt.token.secret-key:secret}")
 	private String secretKey = "secret";
 	
-	@Value("${security.jwt.token.expire-length:validityMilli}")
+	@Value("${security.jwt.token.expire-length:3600000}")
 	private long validityMilli = 3600000;	//1h
 	
 	@Autowired
@@ -49,7 +49,7 @@ public class JwtTokenProvider {
 		
 		var accessToken = getAccessToken(username, roles, now, validity);
 		var refreshToken = getRefreshToken(username, roles, now);
-		
+		System.out.println("accessToken: "+ accessToken);
 		return new TokenVO(username, true, now, validity, accessToken, refreshToken);
 	}
 
@@ -63,6 +63,19 @@ public class JwtTokenProvider {
 				.withIssuer(issuerUrl)
 				.sign(algorithm)
 				.strip();
+	}
+	
+	public TokenVO refreshToken(String refreshToken) {
+		if (refreshToken.contains("Bearer "))
+			refreshToken = refreshToken.substring("Bearer ".length());
+		
+		JWTVerifier verifier = JWT.require(algorithm).build();
+		DecodedJWT decodedJWT = verifier.verify(refreshToken);
+		
+		String username = decodedJWT.getSubject();
+		List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+		
+		return createAccessToken(username, roles);
 	}
 	
 	private String getRefreshToken(String username, List<String> roles, Date now) {
@@ -90,6 +103,7 @@ public class JwtTokenProvider {
 	
 	public String resolveToken(HttpServletRequest req) {
 		String bearerToken = req.getHeader("Authorization");
+		System.out.println(bearerToken);
 		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring("Bearer ".length());
 		}

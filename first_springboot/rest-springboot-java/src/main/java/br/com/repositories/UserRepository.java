@@ -10,6 +10,6 @@ import br.com.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	
-	@Query("SELECT u FROM User WHERE u.userName =:userName")
+	@Query("SELECT u FROM users u WHERE u.user_name =:userName")
 	User findByUsername(@Param("userName") String userName);
 }

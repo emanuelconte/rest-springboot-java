@@ -5,12 +5,14 @@ import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm;
 
-@SpringBootApplication
+
+@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class })
 public class Startup {
 
 	public static void main(String[] args) {
@@ -29,9 +31,7 @@ public class Startup {
         passwordEncoder.setDefaultPasswordEncoderForMatches(pbkdf2Encoder);
         
         String result1 = passwordEncoder.encode("1231020");
-        String result2 = passwordEncoder.encode("1231021");
-        System.out.println("My hash result1 " + result1);
-        System.out.println("My hash result2 " + result2);
+        System.out.println("My hash: " + result1);
         
 	}
 

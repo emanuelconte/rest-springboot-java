@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,6 +24,7 @@ import br.com.security.Jwt.JwtTokenProvider;
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity(securedEnabled = false, prePostEnabled = false, jsr250Enabled = false)
 public class SecurityConfig {
 
 	@Autowired
@@ -34,8 +36,10 @@ public class SecurityConfig {
 				
 		Pbkdf2PasswordEncoder pbkdf2Encoder = new Pbkdf2PasswordEncoder("", 8, 185000, SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA256);
 		encoders.put("pbkdf2", pbkdf2Encoder);
+		
 		DelegatingPasswordEncoder passwordEncoder = new DelegatingPasswordEncoder("pbkdf2", encoders);
 		passwordEncoder.setDefaultPasswordEncoderForMatches(pbkdf2Encoder);
+		
 		return passwordEncoder;
 	}
 	
